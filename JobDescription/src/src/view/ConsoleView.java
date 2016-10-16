@@ -66,19 +66,19 @@ public class ConsoleView {
                     case 10:
                         this.printSheets();
                         break;
+                    case 11:
+                        this.printFullTimeJobs();
+                        break;
+                    case 12:
+                        this.printPartTimeJobs();
+                        break;
+                    case 13:
+                        this.printAlphabeticSheets();
+                        break;
                     default:
                         System.out.println("Goodbye!");
                         return;
                 }
-//            } catch (JobException jobEx) {
-//                System.out.println(jobEx.getMessage());
-//            } catch (TaskException taskEx) {
-//                System.out.println(taskEx.getMessage());
-//            } catch (IdValidatorException idEx) {
-//                System.out.println(idEx.getMessage());
-//            } catch (SheetException sheetEx) {
-//                System.out.println(sheetEx.getMessage());
-//            }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -96,6 +96,9 @@ public class ConsoleView {
         System.out.println("8. Delete Task");
         System.out.println("9. Add Sheet");
         System.out.println("10. List Sheets");
+        System.out.println("11. Filter full time jobs");
+        System.out.println("12. Filter part time jobs");
+        System.out.println("13. Filter sheets alphabetically");
         System.out.println("0. Exit");
     }
 
@@ -175,6 +178,21 @@ public class ConsoleView {
         System.out.println("Id task: ");
         int taskId = this.scanner.nextInt();
         this.controller.addSheet(jobId, taskId);
+    }
+
+    private void printFullTimeJobs() {
+        for (Job job : this.controller.getFullTimeJobs())
+            System.out.println(job);
+    }
+
+    private void printPartTimeJobs() {
+        for (Job job : this.controller.getPartTimeJobs())
+            System.out.println(job);
+    }
+
+    private void printAlphabeticSheets() {
+        for (Sheet sheet : this.controller.getSheetsAlphabetic())
+            System.out.println(sheet);
     }
 
     private void populate() throws JobException, TaskException, SheetException {

@@ -8,29 +8,29 @@ import java.util.*;
  */
 public class Sheet extends Entity {
     private int id;
-    private int jobId;
-    private int taskId;
+    private Job job;
+    private Task task;
 
-    public Sheet(int id, int jobId, int taskId) {
+    public Sheet(int id, Job job, Task task) {
         this.id = id;
-        this.jobId = jobId;
-        this.taskId = taskId;
+        this.job = job;
+        this.task = task;
     }
 
-    public int getJobId() {
-        return jobId;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public Task getTask() {
+        return task;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     @Override
@@ -46,8 +46,8 @@ public class Sheet extends Entity {
     public String toString() {
         return "Sheet{" +
                 "id=" + id +
-                ", jobId=" + jobId +
-                ", taskId=" + taskId +
+                ", job=" + job +
+                ", task=" + task +
                 '}';
     }
 }

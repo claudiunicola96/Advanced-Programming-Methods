@@ -8,11 +8,5 @@ import exception.SheetException;
  */
 public class SheetValidator implements Validator<Sheet, SheetException> {
     public void validate(Sheet sheet) throws SheetException {
-        if (sheet.getJobId() < 1) {
-            throw new SheetException("Invalid job id!");
-        }
-        if (sheet.getTaskId() < 1) {
-            throw new SheetException("Invalid task id!");
-        }
     }
 }

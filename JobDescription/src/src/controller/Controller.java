@@ -29,6 +29,8 @@ public class Controller {
     private JobValidator jobValidator;
     private IdValidator idValidator;
     private SheetValidator sheetValidator;
+    private final String FULL_TIME = "full time";
+    private final String PART_TIME = "part time";
 
     public Controller(TaskRepository taskRepository, JobRepository jobRepository, SheetRepository sheetRepository) {
         this.taskRepository = taskRepository;
@@ -81,16 +83,31 @@ public class Controller {
     }
 
     public void addSheet(int jobId, int taskId) throws SheetException {
-        Sheet sheet = new Sheet(this.sheetRepository.getLastId() + 1, jobId, taskId);
-        this.sheetValidator.validate(sheet);
         if (!this.jobRepository.existId(jobId))
             throw new SheetException("Job id " + jobId + " doesn't exist!");
         if (!this.taskRepository.existId(taskId))
             throw new SheetException("Task id " + taskId + " doesn't exist!");
+        Sheet sheet = new Sheet(
+                this.sheetRepository.getLastId() + 1,
+                this.jobRepository.getJobById(jobId),
+                this.taskRepository.getTaskById(taskId));
+        this.sheetValidator.validate(sheet);
         this.sheetRepository.add(sheet);
     }
 
     public List<Sheet> getSheets() {
         return this.sheetRepository.getSheets();
+    }
+
+    public List<Job> getFullTimeJobs() {
+        return this.jobRepository.getJobs(this.FULL_TIME);
+    }
+
+    public List<Job> getPartTimeJobs() {
+        return this.jobRepository.getJobs(this.PART_TIME);
+    }
+
+    public List<Sheet> getSheetsAlphabetic() {
+        return this.sheetRepository.getSheetsAlphabetic();
     }
 }

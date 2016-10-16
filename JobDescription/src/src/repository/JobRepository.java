@@ -3,6 +3,7 @@ package repository;
 import domain.Entity;
 import domain.Job;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,5 +23,14 @@ public class JobRepository extends BaseRepository {
     @SuppressWarnings("unchecked")
     public List<Job> getJobs() {
         return (List<Job>) super.getAll();
+    }
+
+    public List<Job> getJobs(String type) {
+        List<Job> jobs = new ArrayList<>();
+        for (Job job : this.getJobs()) {
+            if (job.getType() == type)
+                jobs.add(job);
+        }
+        return jobs;
     }
 }
