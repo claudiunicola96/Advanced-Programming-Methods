@@ -19,8 +19,8 @@ public class JobRepository extends BaseRepository {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Job> getJobs() {
-        List<Job> jobs = (List<Job>)(List<?>) super.getAll();
-        return jobs;
+        return (List<Job>) super.getAll();
     }
 }

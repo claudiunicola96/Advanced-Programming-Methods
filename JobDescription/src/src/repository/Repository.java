@@ -16,5 +16,5 @@ public interface Repository<GenericType extends Entity> {
 
     void update(GenericType entity);
 
-    Collection<GenericType> getAll();
+    Collection<?> getAll();
 }

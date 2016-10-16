@@ -18,8 +18,9 @@ public class TaskRepository extends BaseRepository {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Task> getTasks() {
-        List<Task> jobs = (List<Task>) (List<?>) super.getAll();
+        List<Task> jobs = (List<Task>) super.getAll();
         return jobs;
     }
 }
