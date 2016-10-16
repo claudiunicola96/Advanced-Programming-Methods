@@ -8,10 +8,10 @@ import repository.BaseRepository;
  */
 public class BaseRepositoryTest {
 
-    public BaseRepository<Job> baseRepository;
+    public BaseRepository baseRepository;
 
     public BaseRepositoryTest() {
-        this.baseRepository = new BaseRepository<Job>();
+        this.baseRepository = new BaseRepository();
         assert this.baseRepository.getAll().size() == 0;
     }
 
@@ -25,14 +25,13 @@ public class BaseRepositoryTest {
     public void updateTest() {
         Job job = new Job(1, "test", "parttime");
         this.baseRepository.update(job);
-
-        assert this.baseRepository.getAll().get(0).getName() == "test";
-        assert this.baseRepository.getAll().get(0).getType() == "parttime";
+        Job job1 = (Job) this.baseRepository.getAll().get(0);
+        assert job1.getName() == "test";
+        assert job1.getType() == "parttime";
     }
 
     public void deleteTest() {
-        this.baseRepository.remove(1);
-
+        this.baseRepository.remove(new Job(1, "test", "parttime"));
         assert this.baseRepository.getAll().size() == 0;
     }
 

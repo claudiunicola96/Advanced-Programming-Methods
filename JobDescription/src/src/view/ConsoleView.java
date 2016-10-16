@@ -3,6 +3,7 @@ package view;
 import controller.Controller;
 import domain.Job;
 import domain.Task;
+import exception.IdValidatorException;
 import exception.JobException;
 import exception.TaskException;
 import validator.JobValidator;
@@ -22,7 +23,7 @@ public class ConsoleView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void run() throws JobException, TaskException {
+    public void run() throws JobException, TaskException, IdValidatorException {
         this.populate();
 
         while (true) {
@@ -115,7 +116,7 @@ public class ConsoleView {
         this.controller.updateJob(id, name, type);
     }
 
-    private void deleteJob() {
+    private void deleteJob() throws IdValidatorException{
         System.out.println("Id of job that you want delete");
         int id = this.scanner.nextInt();
         this.controller.deleteJob(id);
@@ -136,7 +137,7 @@ public class ConsoleView {
         this.controller.updateTask(id, description);
     }
 
-    private void deleteTask() throws TaskException {
+    private void deleteTask() throws IdValidatorException {
         System.out.println("Id of task that you want delete");
         int id = this.scanner.nextInt();
         this.controller.deleteTask(id);

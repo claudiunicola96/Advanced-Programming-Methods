@@ -2,13 +2,16 @@ package controller;
 
 import domain.Job;
 import domain.Task;
+import exception.IdValidatorException;
 import exception.JobException;
 import exception.TaskException;
 import repository.JobRepository;
 import repository.TaskRepository;
-import util.Array;
+import validator.IdValidator;
 import validator.JobValidator;
 import validator.TaskValidator;
+
+import java.util.*;
 
 
 /**
@@ -19,6 +22,7 @@ public class Controller {
     private JobRepository jobRepository;
     private TaskValidator taskValidator;
     private JobValidator jobValidator;
+    private IdValidator idValidator;
     private int lastJobId = 1;
     private int lastTaskId = 1;
 
@@ -27,6 +31,7 @@ public class Controller {
         this.jobRepository = jobRepository;
         this.taskValidator = new TaskValidator();
         this.jobValidator = new JobValidator();
+        this.idValidator = new IdValidator();
     }
 
     public void addJob(String name, String type) throws JobException {
@@ -35,8 +40,10 @@ public class Controller {
         this.jobRepository.add(job);
     }
 
-    public void deleteJob(int id) {
-        this.jobRepository.remove(id);
+    public void deleteJob(int id) throws IdValidatorException {
+        this.idValidator.validate(id, this.jobRepository.getLastId());
+        Job job = this.jobRepository.getJobById(id);
+        this.jobRepository.remove(job);
     }
 
     public void updateJob(int id, String name, String type) throws JobException {
@@ -49,19 +56,21 @@ public class Controller {
         this.taskRepository.add(task);
     }
 
-    public void deleteTask(int id) {
-        this.taskRepository.remove(id);
+    public void deleteTask(int id) throws IdValidatorException {
+        this.idValidator.validate(id, this.taskRepository.getLastId());
+        Task task = this.taskRepository.getTaskById(id);
+        this.taskRepository.remove(task);
     }
 
     public void updateTask(int id, String description) throws TaskException {
         this.taskRepository.update(new Task(id, description));
     }
 
-    public Array<Job> getJobs() {
-        return this.jobRepository.getAll();
+    public List<Job> getJobs() {
+        return this.jobRepository.getJobs();
     }
 
-    public Array<Task> getTasks() {
-        return this.taskRepository.getAll();
+    public List<Task> getTasks() {
+        return this.taskRepository.getTasks();
     }
 }

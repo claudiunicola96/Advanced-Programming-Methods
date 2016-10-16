@@ -1,44 +1,45 @@
 package repository;
 
 import domain.Entity;
-import util.Array;
+
+
+import java.util.*;
 
 /**
  * Created by claudiu on 11.10.2016.
  */
-public class BaseRepository<GenericType extends Entity> {
+public class BaseRepository implements Repository<Entity> {
 
-    private Array<GenericType> items;
+    private List<Entity> items;
 
     public BaseRepository() {
-        this.items = new Array<GenericType>();
+        this.items = new ArrayList<>();
     }
 
-    public void add(GenericType item) {
+    public void add(Entity item) {
         this.items.add(item);
     }
 
-    public void remove(int id) {
-        int indexToRemove = -1;
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId() == id) {
-                indexToRemove = i;
-                break;
-            }
-        }
-        if (indexToRemove != -1)
-            this.items.remove(indexToRemove);
+    public void remove(Entity item) {
+        this.items.remove(item);
     }
 
-    public void update(GenericType item) {
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId() == item.getId()) {
-                this.items.set(i, item);
+    public void update(Entity item) {
+        for (Entity entity : this.getAll()) {
+            if (entity.getId() == item.getId()) {
+                int index = this.items.indexOf(entity);
+                this.items.set(index, item);
+                return;
             }
         }
     }
 
-    public Array<GenericType> getAll() {
+    public List<Entity> getAll() {
         return this.items;
     }
+
+    public int getLastId() {
+        return this.items.get(this.items.size() - 1).getId();
+    }
+
 }
