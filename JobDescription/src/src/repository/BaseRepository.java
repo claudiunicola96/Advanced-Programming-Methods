@@ -35,7 +35,7 @@ public class BaseRepository<E extends Entity> implements Repository<E> {
         }
     }
 
-    public List<? extends Entity> getAll() {
+    public List<E> getAll() {
         return this.items;
     }
 

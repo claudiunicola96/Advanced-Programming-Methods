@@ -13,7 +13,7 @@ import java.util.List;
 public class SheetRepository extends BaseRepository<Sheet> {
     @SuppressWarnings("unchecked")
     public List<Sheet> getSheets() {
-        return (List<Sheet>) super.getAll();
+        return super.getAll();
     }
 
     public List<Sheet> getSheetsAlphabetic() {

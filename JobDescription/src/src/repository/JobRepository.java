@@ -22,7 +22,7 @@ public class JobRepository extends BaseRepository<Job> {
 
     @SuppressWarnings("unchecked")
     public List<Job> getJobs() {
-        return (List<Job>) super.getAll();
+        return super.getAll();
     }
 
     public List<Job> getJobs(String type) {

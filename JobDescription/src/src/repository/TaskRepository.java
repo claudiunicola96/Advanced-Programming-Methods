@@ -20,7 +20,6 @@ public class TaskRepository extends BaseRepository<Task> {
 
     @SuppressWarnings("unchecked")
     public List<Task> getTasks() {
-        List<Task> jobs = (List<Task>) super.getAll();
-        return jobs;
+        return super.getAll();
     }
 }
