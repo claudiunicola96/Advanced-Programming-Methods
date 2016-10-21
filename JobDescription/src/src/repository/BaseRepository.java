@@ -9,23 +9,23 @@ import java.util.*;
 /**
  * Created by claudiu on 11.10.2016.
  */
-public class BaseRepository implements Repository<Entity> {
+public class BaseRepository<E extends Entity> implements Repository<E> {
 
-    private List<Entity> items;
+    private List<E> items;
 
     public BaseRepository() {
         this.items = new ArrayList<>();
     }
 
-    public void add(Entity item) {
+    public void add(E item) {
         this.items.add(item);
     }
 
-    public void remove(Entity item) {
+    public void remove(E item) {
         this.items.remove(item);
     }
 
-    public void update(Entity item) {
+    public void update(E item) {
         for (Entity entity : this.getAll()) {
             if (entity.getId() == item.getId()) {
                 int index = this.items.indexOf(entity);
@@ -39,12 +39,6 @@ public class BaseRepository implements Repository<Entity> {
         return this.items;
     }
 
-    public int getLastId() {
-        if (this.items.size() == 0)
-            return 0;
-        return this.items.get(this.items.size() - 1).getId();
-    }
-
     @SuppressWarnings("unchecked")
     public boolean existId(int id) {
         for (Entity entity : this.getAll()) {
@@ -52,6 +46,12 @@ public class BaseRepository implements Repository<Entity> {
                 return true;
         }
         return false;
+    }
+
+    public int getLastId() {
+        if (this.items.size() == 0)
+            return 0;
+        return this.items.get(this.items.size() - 1).getId();
     }
 
 }

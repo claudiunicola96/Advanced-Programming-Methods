@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by claudiu on 16.10.2016.
  */
-public class SheetRepository extends BaseRepository {
+public class SheetRepository extends BaseRepository<Sheet> {
     @SuppressWarnings("unchecked")
     public List<Sheet> getSheets() {
         return (List<Sheet>) super.getAll();

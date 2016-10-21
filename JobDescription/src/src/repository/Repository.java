@@ -8,13 +8,13 @@ import java.util.Collection;
 /**
  * Created by claudiu on 16.10.2016.
  */
-public interface Repository<GenericType extends Entity> {
+public interface Repository<E extends Entity> {
 
-    void add(GenericType entity);
+    void add(E entity);
 
-    void remove(GenericType entity);
+    void remove(E entity);
 
-    void update(GenericType entity);
+    void update(E entity);
 
     Collection<?> getAll();
 }
