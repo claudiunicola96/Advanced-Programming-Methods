@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by claudiu on 11.10.2016.
  */
-public class JobRepository extends BaseRepository<Job> {
+public class JobRepository extends BaseRepository<Job>{
 
     public Job getJobById(int id) {
         for (Entity entity : this.getAll()) {
@@ -32,5 +32,9 @@ public class JobRepository extends BaseRepository<Job> {
                 jobs.add(job);
         }
         return jobs;
+    }
+
+    public Job createObjectByLine(String line) {
+        return new Job(1,"nume","part-time");
     }
 }
