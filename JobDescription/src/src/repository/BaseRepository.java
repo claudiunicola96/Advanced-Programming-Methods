@@ -1,7 +1,7 @@
 package repository;
 
 import domain.Entity;
-import domain.Sheet;
+import validator.Validator;
 
 
 import java.util.*;
@@ -12,20 +12,25 @@ import java.util.*;
 public class BaseRepository<E extends Entity> implements Repository<E> {
 
     private List<E> items;
+    private Validator<E> validator;
 
-    public BaseRepository() {
+    public BaseRepository(Validator<E> validator) {
+        this.validator = validator;
         this.items = new ArrayList<>();
     }
 
-    public void add(E item) {
+    public void add(E item) throws Exception {
+        this.validator.validate(item);
         this.items.add(item);
     }
 
-    public void remove(E item) {
+    public void remove(E item) throws Exception {
+        this.validator.validate(item);
         this.items.remove(item);
     }
 
-    public void update(E item) {
+    public void update(E item) throws Exception {
+        this.validator.validate(item);
         for (Entity entity : this.getAll()) {
             if (entity.getId() == item.getId()) {
                 int index = this.items.indexOf(entity);
@@ -52,6 +57,15 @@ public class BaseRepository<E extends Entity> implements Repository<E> {
         if (this.items.size() == 0)
             return 0;
         return this.items.get(this.items.size() - 1).getId();
+    }
+
+    public Entity getEntityById(int id) {
+        for (Entity entity : this.getAll()) {
+            if (entity.getId() == id) {
+                return entity;
+            }
+        }
+        return null;
     }
 
 }

@@ -6,7 +6,7 @@ import exception.TaskException;
 /**
  * Created by claudiu on 12.10.2016.
  */
-public class TaskValidator implements Validator<Task, TaskException> {
+public class TaskValidator implements Validator<Task> {
     public void validate(Task task) throws TaskException {
         if (task.getDescription().isEmpty()) {
             throw new TaskException("Description can't be empty!");

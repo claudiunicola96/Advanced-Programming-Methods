@@ -28,7 +28,7 @@ public class ConsoleView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void run() throws JobException, TaskException, IdValidatorException, SheetException {
+    public void run() throws Exception {
         this.populate();
 
         while (true) {
@@ -126,7 +126,7 @@ public class ConsoleView {
         }
     }
 
-    private void addJob() throws JobException {
+    private void addJob() throws Exception {
         System.out.println("Name: ");
         String name = this.scanner.nextLine();
         System.out.println("Type(full time, part time): ");
@@ -134,7 +134,7 @@ public class ConsoleView {
         this.controller.addJob(name, type);
     }
 
-    private void updateJob() throws JobException {
+    private void updateJob() throws Exception {
         System.out.println("Id of job that you want modify");
         int id = this.scanner.nextInt();
         this.scanner.nextLine();
@@ -145,19 +145,19 @@ public class ConsoleView {
         this.controller.updateJob(id, name, type);
     }
 
-    private void deleteJob() throws IdValidatorException {
+    private void deleteJob() throws Exception {
         System.out.println("Id of job that you want delete");
         int id = this.scanner.nextInt();
         this.controller.deleteJob(id);
     }
 
-    private void addTask() throws TaskException {
+    private void addTask() throws Exception {
         System.out.println("Description: ");
         String description = this.scanner.nextLine();
         this.controller.addTask(description);
     }
 
-    private void updateTask() throws TaskException {
+    private void updateTask() throws Exception {
         System.out.println("Id of task that you want modify");
         int id = this.scanner.nextInt();
         this.scanner.nextLine();
@@ -166,13 +166,13 @@ public class ConsoleView {
         this.controller.updateTask(id, description);
     }
 
-    private void deleteTask() throws IdValidatorException {
+    private void deleteTask() throws Exception {
         System.out.println("Id of task that you want delete");
         int id = this.scanner.nextInt();
         this.controller.deleteTask(id);
     }
 
-    private void addSheet() throws SheetException {
+    private void addSheet() throws Exception {
         System.out.println("Id job: ");
         int jobId = this.scanner.nextInt();
         System.out.println("Id task: ");
@@ -195,7 +195,7 @@ public class ConsoleView {
             System.out.println(sheet);
     }
 
-    private void populate() throws JobException, TaskException, SheetException {
+    private void populate() throws JobException, TaskException, SheetException, Exception {
         this.controller.addJob("frizer", "full time");
         this.controller.addJob("doctor", "part time");
         this.controller.addJob("inginer", "full time");

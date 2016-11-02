@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Created by claudiu on 12.10.2016.
  */
-public class JobValidator implements Validator<Job, JobException> {
+public class JobValidator implements Validator<Job> {
     private String[] types = new String[]{"full time", "part time"};
 
     public void validate(Job job) throws JobException {
