@@ -28,7 +28,7 @@ public class Controller {
     private Repository<Sheet> sheetRepository;
     private IdValidator idValidator;
 
-    public Controller(TaskRepository taskRepository, JobRepository jobRepository, SheetRepository sheetRepository) {
+    public Controller(Repository<Task> taskRepository, Repository<Job> jobRepository, Repository<Sheet> sheetRepository) {
         this.taskRepository = taskRepository;
         this.jobRepository = jobRepository;
         this.sheetRepository = sheetRepository;

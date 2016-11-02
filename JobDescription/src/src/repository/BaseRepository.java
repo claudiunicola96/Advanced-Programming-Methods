@@ -11,12 +11,15 @@ import java.util.*;
  */
 public class BaseRepository<E extends Entity> implements Repository<E> {
 
-    private List<E> items;
-    private Validator<E> validator;
+    protected List<E> items;
+    protected Validator<E> validator;
 
     public BaseRepository(Validator<E> validator) {
         this.validator = validator;
         this.items = new ArrayList<>();
+    }
+
+    public BaseRepository() {
     }
 
     public void add(E item) throws Exception {
