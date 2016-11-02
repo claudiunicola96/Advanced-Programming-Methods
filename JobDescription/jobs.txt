@@ -1,2 +1,2 @@
-1|Doctor|full time
-2|Programator|part time
+1|Programator|full time
+2|dadada|full time

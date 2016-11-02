@@ -71,4 +71,7 @@ public class BaseRepository<E extends Entity> implements Repository<E> {
         return null;
     }
 
+    public void finalize() throws Throwable {
+        super.finalize();
+    }
 }

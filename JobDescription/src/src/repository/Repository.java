@@ -24,4 +24,6 @@ public interface Repository<E extends Entity> {
     boolean existId(int id);
 
     List<E> getAll();
+
+    void finalize() throws Throwable;
 }

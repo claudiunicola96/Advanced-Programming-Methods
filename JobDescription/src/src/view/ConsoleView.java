@@ -196,14 +196,14 @@ public class ConsoleView {
     }
 
     private void populate() throws JobException, TaskException, SheetException, Exception {
-        this.controller.addJob("frizer", "full time");
-        this.controller.addJob("doctor", "part time");
-        this.controller.addJob("inginer", "full time");
-        this.controller.addTask("tunde");
-        this.controller.addTask("proiecteaza");
-        this.controller.addTask("consulta");
-        this.controller.addSheet(1, 1);
-        this.controller.addSheet(2, 3);
-        this.controller.addSheet(3, 2);
+//        this.controller.addJob("frizer", "full time");
+//        this.controller.addJob("doctor", "part time");
+//        this.controller.addJob("inginer", "full time");
+//        this.controller.addTask("tunde");
+//        this.controller.addTask("proiecteaza");
+//        this.controller.addTask("consulta");
+//        this.controller.addSheet(3, 1);
+//        this.controller.addSheet(4, 3);
+//        this.controller.addSheet(3, 2);
     }
 }

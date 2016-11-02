@@ -15,7 +15,7 @@ import java.io.File;
  * Created by claudiu on 07.10.2016.
  */
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception, Throwable {
         //tests
         BaseRepositoryTest baseRepositoryTest = new BaseRepositoryTest();
         baseRepositoryTest.testSuiteRun();
@@ -43,5 +43,6 @@ public class Main {
         ConsoleView consoleView = new ConsoleView(controller);
 
         consoleView.run();
+        jobRepositoryFile.finalize();
     }
 }

@@ -1,11 +1,10 @@
 package repository;
 
 import domain.Entity;
+import domain.Job;
 import validator.Validator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by claudiu on 21.10.2016.
@@ -37,10 +36,22 @@ public class BaseFileRepository<E extends Entity> extends BaseRepository<E> impl
     }
 
     public void writeData() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.repository.getFileName()))) {
+            for (E entity : this.getAll()) {
+                writer.write(this.repository.transform(entity));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public E createFromFormat(String line) {
         return this.repository.createFromFormat(line);
+    }
+
+    public String transform(E entity) {
+        return this.repository.transform(entity);
     }
 
     public String getFileName() {
@@ -49,5 +60,9 @@ public class BaseFileRepository<E extends Entity> extends BaseRepository<E> impl
 
     public Validator<E> getValidator() {
         return this.repository.getValidator();
+    }
+
+    public void finalize() {
+        this.writeData();
     }
 }

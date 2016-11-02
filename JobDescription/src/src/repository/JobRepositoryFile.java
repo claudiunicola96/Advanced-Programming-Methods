@@ -27,4 +27,8 @@ public class JobRepositoryFile extends BaseFileRepository<Job> {
         String[] tokens = line.split("\\|");
         return new Job(Integer.parseInt(tokens[0]), tokens[1], tokens[2]);
     }
+
+    public String transform(Job job) {
+        return  job.getId() + "|" + job.getName() + "|" + job.getType();
+    }
 }
