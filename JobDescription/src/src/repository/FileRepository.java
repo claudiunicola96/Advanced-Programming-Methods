@@ -10,10 +10,16 @@ import java.util.List;
  */
 public interface FileRepository<E extends Entity> extends Repository<E> {
     void loadData();
+
     void writeData();
+
     E createFromFormat(String line);
+
     String transform(E Entity);
+
     Validator<E> getValidator();
+
     String getFileName();
+
     List<E> getAll();
 }

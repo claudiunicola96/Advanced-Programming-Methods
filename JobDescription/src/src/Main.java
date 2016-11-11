@@ -3,7 +3,6 @@ import domain.Job;
 import domain.Sheet;
 import domain.Task;
 import repository.*;
-import tests.BaseRepositoryTest;
 import validator.JobValidator;
 import validator.SheetValidator;
 import validator.TaskValidator;
@@ -17,8 +16,7 @@ import java.io.File;
 public class Main {
     public static void main(String[] args) throws Exception, Throwable {
         //tests
-        BaseRepositoryTest baseRepositoryTest = new BaseRepositoryTest();
-        baseRepositoryTest.testSuiteRun();
+
 
 //      In memory
 //        Repository<Task> taskRepository = new TaskRepository(new TaskValidator());

@@ -57,7 +57,7 @@ public class BaseRepository<E extends Entity> implements Repository<E> {
     }
 
     public int getLastId() {
-        if (this.items.size() == 0)
+        if (( this.items == null || this.items.size() == 0) )
             return 0;
         return this.items.get(this.items.size() - 1).getId();
     }

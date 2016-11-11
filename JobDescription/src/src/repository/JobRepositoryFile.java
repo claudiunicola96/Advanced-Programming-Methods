@@ -1,7 +1,10 @@
 package repository;
 
 import domain.Job;
+import serialization.SerializableIOJobs;
 import validator.Validator;
+
+import java.io.File;
 
 /**
  * Created by claudiu on 02.11.2016.
@@ -13,6 +16,15 @@ public class JobRepositoryFile extends BaseFileRepository<Job> {
     public JobRepositoryFile(Validator<Job> validator, String fileName) {
         this.validator = validator;
         this.fileName = fileName;
+        this.loadData();
+    }
+
+    public void loadData() {
+        this.items = SerializableIOJobs.deserialize(new File("Sjobs.bin").getAbsolutePath());
+    }
+
+    public void writeData() {
+        SerializableIOJobs.serialize(new File("Sjobs.bin").getAbsolutePath(), this.getAll());
     }
 
     public Validator<Job> getValidator() {
@@ -29,6 +41,6 @@ public class JobRepositoryFile extends BaseFileRepository<Job> {
     }
 
     public String transform(Job job) {
-        return  job.getId() + "|" + job.getName() + "|" + job.getType();
+        return job.getId() + "|" + job.getName() + "|" + job.getType();
     }
 }
