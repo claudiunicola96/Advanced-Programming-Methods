@@ -2,12 +2,18 @@ package view;
 
 import controller.Controller;
 import domain.Job;
+import domain.Sheet;
 import domain.Task;
+import exception.IdValidatorException;
 import exception.JobException;
+import exception.SheetException;
 import exception.TaskException;
+import validator.IdValidator;
 import validator.JobValidator;
 import validator.TaskValidator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -22,7 +28,7 @@ public class ConsoleView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void run() throws JobException, TaskException {
+    public void run() throws Exception {
         this.populate();
 
         while (true) {
@@ -54,14 +60,27 @@ public class ConsoleView {
                     case 8:
                         this.deleteTask();
                         break;
+                    case 9:
+                        this.addSheet();
+                        break;
+                    case 10:
+                        this.printSheets();
+                        break;
+                    case 11:
+                        this.printFullTimeJobs();
+                        break;
+                    case 12:
+                        this.printPartTimeJobs();
+                        break;
+                    case 13:
+                        this.printAlphabeticSheets();
+                        break;
                     default:
                         System.out.println("Goodbye!");
                         return;
                 }
-            } catch (JobException jobEx) {
-                System.out.println(jobEx.getMessage());
-            } catch (TaskException taskEx) {
-                System.out.println(taskEx.getMessage());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
         }
     }
@@ -75,6 +94,11 @@ public class ConsoleView {
         System.out.println("6. Add Task");
         System.out.println("7. Update Task");
         System.out.println("8. Delete Task");
+        System.out.println("9. Add Sheet");
+        System.out.println("10. List Sheets");
+        System.out.println("11. Filter full time jobs");
+        System.out.println("12. Filter part time jobs");
+        System.out.println("13. Filter sheets alphabetically");
         System.out.println("0. Exit");
     }
 
@@ -96,7 +120,13 @@ public class ConsoleView {
         }
     }
 
-    private void addJob() throws JobException {
+    private void printSheets() {
+        for (Sheet sheet : this.controller.getSheets()) {
+            System.out.println(sheet);
+        }
+    }
+
+    private void addJob() throws Exception {
         System.out.println("Name: ");
         String name = this.scanner.nextLine();
         System.out.println("Type(full time, part time): ");
@@ -104,7 +134,7 @@ public class ConsoleView {
         this.controller.addJob(name, type);
     }
 
-    private void updateJob() throws JobException {
+    private void updateJob() throws Exception {
         System.out.println("Id of job that you want modify");
         int id = this.scanner.nextInt();
         this.scanner.nextLine();
@@ -115,19 +145,19 @@ public class ConsoleView {
         this.controller.updateJob(id, name, type);
     }
 
-    private void deleteJob() {
+    private void deleteJob() throws Exception {
         System.out.println("Id of job that you want delete");
         int id = this.scanner.nextInt();
         this.controller.deleteJob(id);
     }
 
-    private void addTask() throws TaskException {
+    private void addTask() throws Exception {
         System.out.println("Description: ");
         String description = this.scanner.nextLine();
         this.controller.addTask(description);
     }
 
-    private void updateTask() throws TaskException {
+    private void updateTask() throws Exception {
         System.out.println("Id of task that you want modify");
         int id = this.scanner.nextInt();
         this.scanner.nextLine();
@@ -136,18 +166,44 @@ public class ConsoleView {
         this.controller.updateTask(id, description);
     }
 
-    private void deleteTask() throws TaskException {
+    private void deleteTask() throws Exception {
         System.out.println("Id of task that you want delete");
         int id = this.scanner.nextInt();
         this.controller.deleteTask(id);
     }
 
-    private void populate() throws JobException, TaskException {
-        this.controller.addJob("frizer", "full time");
-        this.controller.addJob("doctor", "part time");
-        this.controller.addJob("inginer", "full time");
-        this.controller.addTask("tunde");
-        this.controller.addTask("consulta");
-        this.controller.addTask("proiecteaza");
+    private void addSheet() throws Exception {
+        System.out.println("Id job: ");
+        int jobId = this.scanner.nextInt();
+        System.out.println("Id task: ");
+        int taskId = this.scanner.nextInt();
+        this.controller.addSheet(jobId, taskId);
+    }
+
+    private void printFullTimeJobs() {
+        for (Job job : this.controller.getFullTimeJobs())
+            System.out.println(job);
+    }
+
+    private void printPartTimeJobs() {
+        for (Job job : this.controller.getPartTimeJobs())
+            System.out.println(job);
+    }
+
+    private void printAlphabeticSheets() {
+        for (Sheet sheet : this.controller.getSheetsAlphabetic())
+            System.out.println(sheet);
+    }
+
+    private void populate() throws JobException, TaskException, SheetException, Exception {
+//        this.controller.addJob("frizer", "full time");
+//        this.controller.addJob("doctor", "part time");
+//        this.controller.addJob("inginer", "full time");
+//        this.controller.addTask("tunde");
+//        this.controller.addTask("proiecteaza");
+//        this.controller.addTask("consulta");
+//        this.controller.addSheet(3, 1);
+//        this.controller.addSheet(4, 3);
+//        this.controller.addSheet(3, 2);
     }
 }

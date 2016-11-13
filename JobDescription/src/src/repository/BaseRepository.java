@@ -1,44 +1,77 @@
 package repository;
 
 import domain.Entity;
-import util.Array;
+import validator.Validator;
+
+
+import java.util.*;
 
 /**
  * Created by claudiu on 11.10.2016.
  */
-public class BaseRepository<GenericType extends Entity> {
+public class BaseRepository<E extends Entity> implements Repository<E> {
 
-    private Array<GenericType> items;
+    protected List<E> items;
+    protected Validator<E> validator;
 
-    public BaseRepository() {
-        this.items = new Array<GenericType>();
+    public BaseRepository(Validator<E> validator) {
+        this.validator = validator;
+        this.items = new ArrayList<>();
     }
 
-    public void add(GenericType item) {
+    public BaseRepository() {
+    }
+
+    public void add(E item) throws Exception {
+        this.validator.validate(item);
         this.items.add(item);
     }
 
-    public void remove(int id) {
-        int indexToRemove = -1;
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId() == id) {
-                indexToRemove = i;
-                break;
-            }
-        }
-        if (indexToRemove != -1)
-            this.items.remove(indexToRemove);
+    public void remove(E item) throws Exception {
+        this.validator.validate(item);
+        this.items.remove(item);
     }
 
-    public void update(GenericType item) {
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId() == item.getId()) {
-                this.items.set(i, item);
+    public void update(E item) throws Exception {
+        this.validator.validate(item);
+        for (Entity entity : this.getAll()) {
+            if (entity.getId() == item.getId()) {
+                int index = this.items.indexOf(entity);
+                this.items.set(index, item);
+                return;
             }
         }
     }
 
-    public Array<GenericType> getAll() {
+    public List<E> getAll() {
         return this.items;
+    }
+
+    @SuppressWarnings("unchecked")
+    public boolean existId(int id) {
+        for (Entity entity : this.getAll()) {
+            if (entity.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    public int getLastId() {
+        if (( this.items == null || this.items.size() == 0) )
+            return 0;
+        return this.items.get(this.items.size() - 1).getId();
+    }
+
+    public Entity getEntityById(int id) {
+        for (Entity entity : this.getAll()) {
+            if (entity.getId() == id) {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public void finalize() throws Throwable {
+        super.finalize();
     }
 }
