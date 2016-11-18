@@ -1,1 +1,5 @@
 1|Programeaza
+3|Para
+2|Prelucreaza
+3|Danseaza
+4|Orice

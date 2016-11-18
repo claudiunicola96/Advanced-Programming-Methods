@@ -73,7 +73,10 @@ public class ConsoleView {
                         this.printPartTimeJobs();
                         break;
                     case 13:
-                        this.printAlphabeticSheets();
+                        this.printTasksAlphabetic();
+                        break;
+                    case 14:
+                        this.printFulltimeSheets();
                         break;
                     default:
                         System.out.println("Goodbye!");
@@ -98,7 +101,8 @@ public class ConsoleView {
         System.out.println("10. List Sheets");
         System.out.println("11. Filter full time jobs");
         System.out.println("12. Filter part time jobs");
-        System.out.println("13. Filter sheets alphabetically");
+        System.out.println("13. Filter tasks alphabetically");
+        System.out.println("14. Filter full time sheets");
         System.out.println("0. Exit");
     }
 
@@ -181,8 +185,7 @@ public class ConsoleView {
     }
 
     private void printFullTimeJobs() {
-        for (Job job : this.controller.getFullTimeJobs())
-            System.out.println(job);
+        this.controller.getFullTimeJobs().forEach(job -> System.out.println(job));
     }
 
     private void printPartTimeJobs() {
@@ -190,9 +193,14 @@ public class ConsoleView {
             System.out.println(job);
     }
 
-    private void printAlphabeticSheets() {
-        for (Sheet sheet : this.controller.getSheetsAlphabetic())
-            System.out.println(sheet);
+    private void printTasksAlphabetic() {
+        System.out.println("Letter: ");
+        String letter = this.scanner.nextLine();
+        this.controller.getTasksAlphabetic(letter).forEach(task -> System.out.println(task));
+    }
+
+    private void printFulltimeSheets() {
+        this.controller.getFullTimeSheets().forEach(sheet -> System.out.println(sheet));
     }
 
     private void populate() throws JobException, TaskException, SheetException, Exception {
