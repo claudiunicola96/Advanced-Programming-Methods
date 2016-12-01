@@ -31,7 +31,8 @@ public class BaseFileRepository<E extends Entity> extends BaseRepository<E> impl
                 this.add(obj);
             }
         } catch (Exception e) {
-            e.printStackTrace();        }
+            e.printStackTrace();
+        }
     }
 
     public void writeData() {
