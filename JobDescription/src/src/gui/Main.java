@@ -30,7 +30,7 @@ public class Main extends Application {
         JobView jobView = new JobView(jobService);
         Parent root = jobView.getView();
         Scene scene = new Scene(root, 800, 800);
-        stage.setTitle("Welcome to JavaFX!!");
+        stage.setTitle("Job Management System");
         stage.setScene(scene);
         stage.show();
     }
