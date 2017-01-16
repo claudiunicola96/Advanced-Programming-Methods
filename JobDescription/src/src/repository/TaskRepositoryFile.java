@@ -27,4 +27,8 @@ public class TaskRepositoryFile extends BaseFileRepository<Task> {
         String[] tokens = line.split("\\|");
         return new Task(Integer.parseInt(tokens[0]), tokens[1]);
     }
+
+    public String transform(Task job) {
+        return job.getId() + "|" + job.getDescription();
+    }
 }

@@ -1,1 +1,4 @@
 1|Programeaza
+2|Prelucreaza
+3|Danseaza
+5|Abac

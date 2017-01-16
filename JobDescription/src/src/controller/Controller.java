@@ -7,6 +7,9 @@ import exception.IdValidatorException;
 import exception.JobException;
 import exception.SheetException;
 import exception.TaskException;
+import filters.JobFilter;
+import filters.SheetFilter;
+import filters.TaskFilter;
 import repository.JobRepository;
 import repository.Repository;
 import repository.SheetRepository;
@@ -90,18 +93,18 @@ public class Controller {
     }
 
     public List<Job> getFullTimeJobs() {
-//        return this.jobRepository.getJobs(this.FULL_TIME);
-        return null;
+        return JobFilter.getJobsByType(this.getJobs(), "full time");
     }
 
     public List<Job> getPartTimeJobs() {
-
-//        return this.jobRepository.getJobs(this.PART_TIME);
-        return null;
+        return JobFilter.getJobsByType(this.getJobs(), "part time");
     }
 
-    public List<Sheet> getSheetsAlphabetic() {
-//        return this.sheetRepository.getSheetsAlphabetic();
-        return null;
+    public List<Task> getTasksAlphabetic(String letter) {
+        return TaskFilter.filterTasksByFirstLetter(this.getTasks(), letter);
+    }
+
+    public List<Sheet> getFullTimeSheets() {
+        return SheetFilter.filterByTypeAndDescriptionDesc(this.getSheets());
     }
 }

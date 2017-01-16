@@ -1,3 +1,5 @@
 1|Programator|full time
-2|dadada|full time
-3|dada|full time
+2|da|full time
+3|dada|part time
+4|Orice|part time
+5|Doctor|full time
